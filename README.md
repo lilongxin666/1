@@ -63,32 +63,37 @@ Nature 风格多面板图 + 表格
 
 ## 3. 核心 Skills：日常优先
 
-- [`nature-academic-search`](skills/nature-academic-search/README.md) — 学术检索与证据链
-- [`nature-reader`](skills/nature-reader/README.md) — 论文精读、方法拆解
-- [`nature-citation`](skills/nature-citation/README.md) — 引用与参考文献
-- [`nature-ref-verifier`](skills/nature-ref-verifier/README.md) — 参考文献真实性核验
-- [`nature-data`](skills/nature-data/README.md) — 数据治理与数据声明
-- [`nature-experiment-log`](skills/nature-experiment-log/README.md) — 实验过程记录
-- [`nature-statistics`](skills/nature-statistics/README.md) — 统计分析与结果报告
-- [`nature-figure`](skills/nature-figure/README.md) — 投稿级科研图
-- [`nature-writing`](skills/nature-writing/README.md) — 学术论文写作
-- [`nature-polishing`](skills/nature-polishing/README.md) — 英文学术润色
-- [`nature-reviewer`](skills/nature-reviewer/README.md) — 投稿前审稿模拟
-- [`nature-response`](skills/nature-response/README.md) — 返修与审稿回复
+日常优先使用：`nature-academic-search`、`nature-reader`、`nature-citation`、`nature-ref-verifier`、`nature-data`、`nature-experiment-log`、`nature-statistics`、`nature-figure`、`nature-writing`、`nature-polishing`、`nature-reviewer`、`nature-response`。
 
-## 4. 扩展 Skills：需要时再用
+其余 Skills 保留为扩展能力，需要时再调用；不移动、不删除，以避免破坏上游依赖和更新机制。
 
-这些能力保留，但不作为 NIR 日常工作流的第一入口：
+## 4. 完整技能索引
 
-- [`nature-downloader`](skills/nature-downloader/README.md) — 文献下载辅助
-- [`nature-literature-pipeline`](skills/nature-literature-pipeline/README.md) — 大规模文献流水线
-- [`nature-paper-card`](skills/nature-paper-card/README.md) — 论文卡片
-- [`nature-paper2ppt`](skills/nature-paper2ppt/README.md) — 论文转汇报 PPT
-- [`nature-image2ppt`](skills/nature-image2ppt/README.md) — 图片重建 PPT
-- [`nature-proposal-writer`](skills/nature-proposal-writer/README.md) — 项目/基金文本
-- [`nature-paper-to-patent`](skills/nature-paper-to-patent/README.md) — 论文转专利材料
+> 下表保持上游仓库 CI 所需的标准索引格式，同时也是完整能力入口。
 
-共享支持包：`nature-shared`（供其他 Skill 内部读取，不单独作为主要入口）。
+| Skill | 用途 |
+|---|---|
+| [`nature-academic-search`](skills/nature-academic-search/README.md) | 多源学术检索与证据链 |
+| [`nature-citation`](skills/nature-citation/README.md) | 引用与参考文献管理 |
+| [`nature-data`](skills/nature-data/README.md) | 数据治理与数据声明 |
+| [`nature-downloader`](skills/nature-downloader/README.md) | 文献下载辅助 |
+| [`nature-experiment-log`](skills/nature-experiment-log/README.md) | 实验记录与追踪 |
+| [`nature-figure`](skills/nature-figure/README.md) | 投稿级科研绘图 |
+| [`nature-image2ppt`](skills/nature-image2ppt/README.md) | 图片重建 PPT |
+| [`nature-literature-pipeline`](skills/nature-literature-pipeline/README.md) | 文献流水线 |
+| [`nature-paper-card`](skills/nature-paper-card/README.md) | 论文卡片与证据整理 |
+| [`nature-paper-to-patent`](skills/nature-paper-to-patent/README.md) | 论文转专利材料 |
+| [`nature-paper2ppt`](skills/nature-paper2ppt/README.md) | 论文转汇报 PPT |
+| [`nature-polishing`](skills/nature-polishing/README.md) | 学术英文润色 |
+| [`nature-proposal-writer`](skills/nature-proposal-writer/README.md) | 项目/基金文本 |
+| [`nature-reader`](skills/nature-reader/README.md) | 论文精读与结构化拆解 |
+| [`nature-ref-verifier`](skills/nature-ref-verifier/README.md) | 参考文献真实性核验 |
+| [`nature-response`](skills/nature-response/README.md) | 审稿回复与返修材料 |
+| [`nature-reviewer`](skills/nature-reviewer/README.md) | 投稿前审稿模拟 |
+| [`nature-statistics`](skills/nature-statistics/README.md) | 统计分析与报告 |
+| [`nature-writing`](skills/nature-writing/README.md) | 学术论文写作 |
+
+共享支持包：`nature-shared`（供其他 Skill 内部读取，不作为独立触发 Skill 计入上表）。
 
 ## 5. 我的科研工作台目录
 
@@ -96,10 +101,10 @@ Nature 风格多面板图 + 表格
 research-workbench/
 ├─ README.md
 └─ nir-chemometrics/
-   ├─ WORKFLOW.md          # 从数据到论文的完整流程
-   ├─ PROMPTS.md           # 可以直接复制使用的提示词
-   ├─ FIGURE_STANDARD.md   # NIR / Nature 风格图规范
-   └─ research-profile.yaml# 默认研究配置与原则
+   ├─ WORKFLOW.md           # 从数据到论文的完整流程
+   ├─ PROMPTS.md            # 可以直接复制使用的提示词
+   ├─ FIGURE_STANDARD.md    # NIR / Nature 风格图规范
+   └─ research-profile.yaml # 默认研究配置与原则
 ```
 
 建议新项目按下面结构组织：
