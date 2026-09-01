@@ -21,10 +21,12 @@ jobs:
         run: |
           git clone --depth 1 https://github.com/Yuan1z0825/nature-skills.git /tmp/nature-skills
           rm -rf /tmp/nature-skills/.git
+          rm -rf /tmp/nature-skills/.github/workflows
 
-      - name: Replace target contents with source
+      - name: Replace target contents with source (except workflows)
         run: |
-          find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
+          find . -mindepth 1 -maxdepth 1 ! -name '.git' ! -path './.github' -exec rm -rf {} +
+          rm -rf .github/requirements-ci.txt
           cp -a /tmp/nature-skills/. .
 
       - name: Commit imported repository
@@ -36,5 +38,5 @@ jobs:
             echo 'No changes to import.'
             exit 0
           fi
-          git commit -m 'Import Yuan1z0825/nature-skills'
+          git commit -m 'Import Yuan1z0825/nature-skills content'
           git push origin HEAD:main
