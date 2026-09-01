@@ -1,0 +1,117 @@
+profile: nir-chemometrics
+language: zh-CN
+primary_domain:
+  - near-infrared spectroscopy
+  - chemometrics
+  - spectral feature selection
+  - robust classification
+  - model transfer
+
+prioritized_skills:
+  literature:
+    - nature-academic-search
+    - nature-reader
+    - nature-citation
+    - nature-ref-verifier
+  analysis:
+    - nature-data
+    - nature-experiment-log
+    - nature-statistics
+    - nature-figure
+  writing:
+    - nature-writing
+    - nature-polishing
+    - nature-reviewer
+    - nature-response
+
+validation_policy:
+  holdout_labels_visible_during_training: false
+  nested_cross_validation: preferred
+  feature_selection_inside_training_only: true
+  hyperparameter_tuning_inside_training_only: true
+  report_outer_fold_mean_std: true
+  repeated_runs_for_stochastic_methods: true
+  minimum_repeated_runs: 20
+  fixed_random_seed: true
+
+classification_metrics:
+  - accuracy
+  - balanced_accuracy
+  - macro_f1
+  - mcc
+  - confusion_matrix
+
+regression_metrics:
+  - r2
+  - rmse
+  - mae
+  - bias
+
+feature_selection:
+  baseline:
+    - full_spectrum
+  classical:
+    - UVE
+    - MC-UVE
+    - CARS
+    - SPA
+    - VIP
+  metaheuristic:
+    - BPSO
+    - APSO
+    - DBO
+  stability_outputs:
+    - selected_feature_count
+    - selection_frequency
+    - jaccard_similarity
+    - kuncheva_index
+    - outer_fold_overlap
+
+models:
+  classification:
+    - SVM
+    - PLS-DA
+    - RandomForest
+    - XGBoost
+  regression:
+    - PLSR
+    - SVR
+    - RandomForestRegressor
+
+figure_defaults:
+  publication_style: Nature-like
+  vector_output:
+    - pdf
+    - svg
+  raster_dpi: 600
+  avoid_3d: true
+  avoid_decorative_gradients: true
+  explain_error_bars: true
+  audit_label_collisions: true
+  audit_panel_alignment: true
+  wavenumber_default_range_cm_1:
+    min: 4000
+    max: 9200
+  wavenumber_major_tick_cm_1: 1000
+
+writing_policy:
+  results_before_discussion: true
+  numbers_must_trace_to_results: true
+  spectral_assignments_require_real_references: true
+  avoid_algorithm_stacking_without_problem_definition: true
+
+recommended_execution_order:
+  - define_research_question
+  - freeze_raw_data
+  - create_data_split
+  - compare_preprocessing
+  - nested_feature_selection
+  - tune_model
+  - evaluate_outer_folds
+  - repeat_stochastic_runs
+  - analyze_feature_stability
+  - interpret_spectral_regions
+  - build_figures_and_tables
+  - write_methods_results_discussion
+  - verify_references
+  - reviewer_audit
