@@ -9,6 +9,7 @@ on:
 permissions:
   contents: write
 
+# Rerun after official Spectrum-directory parser fix.
 jobs:
   build:
     runs-on: ubuntu-latest
