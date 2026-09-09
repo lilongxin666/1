@@ -10,6 +10,7 @@ permissions:
   contents: write
 
 # Organizer is pinned to the parser-fix commit to avoid raw CDN staleness.
+# Triggered for Excel conversion request on 2026-09-09.
 jobs:
   build:
     runs-on: ubuntu-latest
