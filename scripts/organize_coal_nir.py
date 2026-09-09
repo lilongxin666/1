@@ -34,9 +34,12 @@ def unique_names(names):
     return out
 
 
-spectra_dirs = [p for p in ROOT.rglob("*") if p.is_dir() and p.name.lower() == "spectra"]
+spectra_dirs = [
+    p for p in ROOT.rglob("*")
+    if p.is_dir() and p.name.lower() in {"spectrum", "spectra"}
+]
 if not spectra_dirs:
-    raise RuntimeError("No Spectra directory found after extraction.")
+    raise RuntimeError("No Spectrum/Spectra directory found after extraction.")
 spectra_dir = spectra_dirs[0]
 csv_files = sorted(spectra_dir.glob("*.csv"))
 if not csv_files:
