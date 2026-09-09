@@ -7,10 +7,8 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
-# Organizer is pinned to the parser-fix commit to avoid raw CDN staleness.
-# Triggered for Excel conversion request on 2026-09-09.
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -34,7 +32,6 @@ jobs:
             -o work/Spectroscopy_dataset_original.tgz
           echo '26ff36e5d59ddae1862eb887f728a5ae  work/Spectroscopy_dataset_original.tgz' | md5sum -c -
           tar -xzf work/Spectroscopy_dataset_original.tgz -C work/extracted
-          find work/extracted -maxdepth 3 -type f | sort | head -100
 
       - name: Download pinned organizer
         shell: bash
@@ -43,7 +40,6 @@ jobs:
           curl -L --fail --retry 5 \
             'https://raw.githubusercontent.com/lilongxin666/1/0a9bed225ed95fb36f740e804d73b2754e99d501/scripts/organize_coal_nir.py' \
             -o work/organize_coal_nir.py
-          grep -n 'Spectrum/Spectra' work/organize_coal_nir.py
 
       - name: Build analysis-ready dataset
         shell: bash
@@ -52,26 +48,12 @@ jobs:
           python3 work/organize_coal_nir.py
           cd work
           zip -r -9 coal_nir_organized.zip organized >/dev/null
-          ls -lh Spectroscopy_dataset_original.tgz coal_nir_organized.zip organized/Coal_NIR_All.csv.gz organized/Coal_NIR_Metadata.csv
+          ls -lh coal_nir_organized.zip organized/Coal_NIR_All.csv.gz organized/Coal_NIR_Metadata.csv
 
-      - name: Publish stable GitHub release assets
-        env:
-          GH_TOKEN: ${{ github.token }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          TAG='coal-nir-dataset-v1'
-          TITLE='Coal NIR dataset — organized research copy'
-          NOTES='Official Zenodo dataset (DOI 10.5281/zenodo.11137126), MD5-verified and organized for chemometrics. Assets include the unmodified official archive and an analysis-ready ZIP with one-spectrum-per-row CSV.gz data, metadata, wavelengths, sample summaries, and original Documentation/Analysis folders.'
-          if gh release view "$TAG" >/dev/null 2>&1; then
-            gh release upload "$TAG" work/coal_nir_organized.zip work/Spectroscopy_dataset_original.tgz --clobber
-          else
-            gh release create "$TAG" work/coal_nir_organized.zip work/Spectroscopy_dataset_original.tgz --title "$TITLE" --notes "$NOTES"
-          fi
-
-      - name: Print download links
-        shell: bash
-        run: |
-          echo 'https://github.com/lilongxin666/1/releases/tag/coal-nir-dataset-v1'
-          echo 'https://github.com/lilongxin666/1/releases/download/coal-nir-dataset-v1/coal_nir_organized.zip'
-          echo 'https://github.com/lilongxin666/1/releases/download/coal-nir-dataset-v1/Spectroscopy_dataset_original.tgz'
+      - name: Upload organized dataset artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coal-nir-organized
+          path: work/coal_nir_organized.zip
+          if-no-files-found: error
+          retention-days: 7
