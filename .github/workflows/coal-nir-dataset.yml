@@ -9,7 +9,7 @@ on:
 permissions:
   contents: write
 
-# Rerun after official Spectrum-directory parser fix.
+# Organizer is pinned to the parser-fix commit to avoid raw CDN staleness.
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -35,13 +35,14 @@ jobs:
           tar -xzf work/Spectroscopy_dataset_original.tgz -C work/extracted
           find work/extracted -maxdepth 3 -type f | sort | head -100
 
-      - name: Download organizer from this repository
+      - name: Download pinned organizer
         shell: bash
         run: |
           set -euo pipefail
           curl -L --fail --retry 5 \
-            'https://raw.githubusercontent.com/lilongxin666/1/main/scripts/organize_coal_nir.py' \
+            'https://raw.githubusercontent.com/lilongxin666/1/0a9bed225ed95fb36f740e804d73b2754e99d501/scripts/organize_coal_nir.py' \
             -o work/organize_coal_nir.py
+          grep -n 'Spectrum/Spectra' work/organize_coal_nir.py
 
       - name: Build analysis-ready dataset
         shell: bash
